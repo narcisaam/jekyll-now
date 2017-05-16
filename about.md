@@ -4,4 +4,4 @@ title: About
 permalink: /about/
 ---
 
-Hi!
+Outreachy intern at Linux Kernel. 
