@@ -1,7 +1,6 @@
 ---
 layout: post
-title: It begins!
+title: And it's on!
 ---
-
-30 May
+May
 
