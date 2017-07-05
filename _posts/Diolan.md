@@ -3,7 +3,9 @@ layout: post
 title: New hardware setup using DLN-2 Adapter
 ---
 
-In my last post, I described the hardware setup using the UDOO NEO board. UDOO was fun to play with and I successfully managed to make it work with our IIO kernel. However, copying the kernel to the microSD everytime changes were made was not very convenient. So, we came up with solutions to this problem and one way of solving this was to boot over network. Unfortunately, this version of UDOO Neo doesn't have an Ethernet port. Besides, UDOO is far more complex than we need for our purpose now. On that account, we decided to trade UDOO for the simplicity of an USB-to-I2C adapter. 
+In my last post, I described the hardware setup using the UDOO NEO board. UDOO was fun to play with and I successfully managed to make it work with our IIO kernel. However, copying the kernel to the microSD everytime changes were made was not very convenient. So, we came up with solutions to this problem and one way of solving this was to boot over network. Unfortunately, this version of UDOO Neo doesn't have an Ethernet port. Besides, UDOO is a little more complex than we need for our purpose now. So, to speed things up, my mentors equipped me with an USB-to-I2C adapter. 
 ![DLN-2]({{ site.baseurl }}/images/diolan.png "DLN-2")
-This is a diolan adapter (DLN-2) that I received from my mentors. In order to set it up, I moved the jumpers to change voltage supply to 3.3 V. I already have pull-up resistors on the breakout board, for SDA and SCL, so I only needed to connect the corresponding pins using the Diolan's hooks.
+This is a diolan adapter (DLN-2). In order to set it up, I moved the jumpers to change voltage supply to 3.3 V. I already have pull-up resistors on the breakout board, for SDA and SCL, so I only needed to connect the corresponding pins using Diolan's hooks.
+
+
 
