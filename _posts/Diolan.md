@@ -13,6 +13,14 @@ This is a diolan adapter (DLN-2). In order to set it up, I moved the jumpers to 
 
 I use QEMU for testing. In order to be able to work with the Diolan from QEMU, select 'Y' for kernel configuration option CONFIG_I2C_DLN2.
 
+After writing a probe function for my sensor and loading the module (I'll detail code implementation in another post) I can see my device listed.
+
+```sh
+cat /sys/bus/iio/device/iio\:device0/name
+ccs811
+```
+But before being able to see this, you need to instantiate your I2C device! There are several ways to accomplish this and you can find more information here [Documentation/i2c/instantiating-devices] (http://elixir.free-electrons.com/linux/latest/source/Documentation/i2c/instantiating-devices)
+
 This is it!
 
 
