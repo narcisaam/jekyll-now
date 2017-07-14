@@ -40,8 +40,7 @@ $ echo ccs811 0x5B > /sys/bus/i2c/devices/i2c-0/new_device
 ```
 Here we informed the kernel about a device named "ccs811" which lives at the address 0x5B. As we listed "ccs811" as a supported device, our driver now shows up and says: "I can handle this!"
 
-But can _he_ really?.
-_He_ can't be sure, until _he_ performs a probe.
+But can it really? It can't be sure, until it performs a probe.
 
 ### The probe
 
