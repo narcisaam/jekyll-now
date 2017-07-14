@@ -50,11 +50,11 @@ Then it goes on and confirms the detected device is a CCS811 by reading the hard
 For ccs811 sensor, the hardware id is stored in a single byte read only register and has to have the value 0x81. The probe reads the value from this register and checks to see if it is indeed 0x81:
 
 ```c
-ret = i2c_smbus_read_byte_data(client, CCS811_HW_ID);
+ret = i2c_smbus_read_byte_data(client, 0x20);
 if (ret < 0)
 	return ret;
 
-if (ret != CCS881_HW_ID_VALUE) {
+if (ret != 0x81) {
 	dev_err(&client->dev, "hardware id doesn't match CCS81x\n");
 	return -ENODEV;
 }
@@ -62,13 +62,13 @@ if (ret != CCS881_HW_ID_VALUE) {
 
 You can see I've used `i2c_smbus_read_byte_data` function to read the value of the register.
 
-From the [documentation](https://www.kernel.org/doc/Documentation/i2c/smbus-protocol) of this function:
+From the [documentation](https://www.kernel.org/doc/Documentation/i2c/smbus-protocol):
 
-"This reads a single byte from a device, from a designated register. The register is specified through the Comm byte.
+i2c_smbus_read_byte_data()
+===========================
+"This reads a single byte from a device, from a designated register."
 
-S Addr Wr [A] Comm [A] S Addr Rd [A] [Data] NA P "
-
-So here we say that we want to read 1 byte from the register specified by Comm. In our case, this is CCS811_HW_ID (a macro for the value 0x20, specified in the datasheet)
+So here we say that we want to read 1 byte from the register specified by 0x20 (this is the address of the register, as specified in the datasheet)
 
 Memory for the IIO device is allocated using devm_iio_device_alloc.
 
