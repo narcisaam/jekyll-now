@@ -4,9 +4,10 @@ title: Init and Probe
 ---
 
 A driver is described using the **i2c_driver** struct. In order to register our chip driver, we first need to populate this struct.
-We first provide a name for the driver using the driver.name field.
-We then pass some function pointers that interests us. I will implement the _probe and _remove functions, so I'm populating the corresponding fields. 
-Another member that I will initialize is the “id_table”, which lists the i2c_devices supported by the driver. On that account, I define an array that will contain entries of type **struct i2c_device_id**. This is a struct that provides 2 members: name and driver_data.
+
+ * Providing a name for the driver is done using the driver.name field.
+ * Then, we need to pass some function pointers that interests us. I will implement the _probe and _remove functions, so I'm populating the corresponding fields. 
+ * Another member that I will initialize is the “id_table”, which lists the i2c_devices supported by the driver. On that account, I define an array that will contain entries of type **struct i2c_device_id**. This is a struct that provides 2 members: name and driver_data.
 I'll add one single entry to my array,  meaning that we support one chip named “ccs811”. This means that when the kernel discovers a “ccs811” device, it will look for a driver that can handle this “ccs811”. 
 
 Now that we defined our i2c_driver struct, we pass it to the helper **module_i2c_driver** macro that registers our driver. Basically, **module_init()** and **module_exit()** are replaced by this macro.
