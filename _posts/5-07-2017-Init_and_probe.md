@@ -46,6 +46,16 @@ But can it really? It can't be sure, until it performs a probe.
 
 The probe function will first check functionality. Different adapters implement different I2C specifications, so we have to test to see what functionalities are implemented.
 Then it goes on and confirms the detected device is a CCS811 by reading the hardware id and version.
+Any device is identified by an id. In this sensor's case, the hardware id is stored in a single byte read only register and has to have the value 0x81. The probe reads the value from this register and checks to see if it is indeed 0x81:
+
+`ret = i2c_smbus_read_byte_data(client, CCS811_HW_ID);
+	if (ret < 0)
+		return ret;
+
+	if (ret != CCS881_HW_ID_VALUE) {
+		dev_err(&client->dev, "hardware id doesn't match CCS81x\n");
+		return -ENODEV;
+	}`
 
 Memory for the IIO device is allocated using devm_iio_device_alloc.
 
@@ -60,4 +70,6 @@ After this, we can initialize some iio_dev fields:
 	indio_dev->name = id->name;
 	indio_dev->info = &ccs811_info;
 ```
-Lastly, calling iio_device_register() will register the device with the I2C core.
+Lastly, calling `iio_device_register()` will register the device with the I2C core.
+
+
