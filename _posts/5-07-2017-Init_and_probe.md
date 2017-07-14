@@ -48,14 +48,16 @@ The probe function will first check functionality. Different adapters implement 
 Then it goes on and confirms the detected device is a CCS811 by reading the hardware id and version.
 Any device is identified by an id. In this sensor's case, the hardware id is stored in a single byte read only register and has to have the value 0x81. The probe reads the value from this register and checks to see if it is indeed 0x81:
 
-`ret = i2c_smbus_read_byte_data(client, CCS811_HW_ID);
-	if (ret < 0)
-		return ret;
+```c
+ret = i2c_smbus_read_byte_data(client, CCS811_HW_ID);
+if (ret < 0)
+	return ret;
 
-	if (ret != CCS881_HW_ID_VALUE) {
-		dev_err(&client->dev, "hardware id doesn't match CCS81x\n");
-		return -ENODEV;
-	}`
+if (ret != CCS881_HW_ID_VALUE) {
+	dev_err(&client->dev, "hardware id doesn't match CCS81x\n");
+	return -ENODEV;
+}
+```
 
 Memory for the IIO device is allocated using devm_iio_device_alloc.
 
