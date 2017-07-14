@@ -63,6 +63,7 @@ if (ret != 0x81) {
 You can see I've used `i2c_smbus_read_byte_data` function to read the value of the register.
 
 From the [documentation](https://www.kernel.org/doc/Documentation/i2c/smbus-protocol):
+
 i2c_smbus_read_byte_data():
 "This reads a single byte from a device, from a designated register."
 
