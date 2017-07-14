@@ -64,8 +64,7 @@ You can see I've used `i2c_smbus_read_byte_data` function to read the value of t
 
 From the [documentation](https://www.kernel.org/doc/Documentation/i2c/smbus-protocol):
 
-i2c_smbus_read_byte_data()
-===========================
+i2c_smbus_read_byte_data():
 "This reads a single byte from a device, from a designated register."
 
 So here we say that we want to read 1 byte from the register specified by 0x20 (this is the address of the register, as specified in the datasheet)
