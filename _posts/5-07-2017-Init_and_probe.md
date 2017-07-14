@@ -46,7 +46,8 @@ But can it really? It can't be sure, until it performs a probe.
 
 The probe function will first check functionality. Different adapters implement different I2C specifications, so we have to test to see what functionalities are implemented.
 Then it goes on and confirms the detected device is a CCS811 by reading the hardware id and version.
-Any device is identified by an id. In this sensor's case, the hardware id is stored in a single byte read only register and has to have the value 0x81. The probe reads the value from this register and checks to see if it is indeed 0x81:
+
+For ccs811 sensor, the hardware id is stored in a single byte read only register and has to have the value 0x81. The probe reads the value from this register and checks to see if it is indeed 0x81:
 
 ```c
 ret = i2c_smbus_read_byte_data(client, CCS811_HW_ID);
@@ -58,6 +59,16 @@ if (ret != CCS881_HW_ID_VALUE) {
 	return -ENODEV;
 }
 ```
+
+You can see I've used `i2c_smbus_read_byte_data` function to read the value of the register.
+
+From the [documentation](https://www.kernel.org/doc/Documentation/i2c/smbus-protocol) of this function:
+
+"This reads a single byte from a device, from a designated register. The register is specified through the Comm byte.
+
+S Addr Wr [A] Comm [A] S Addr Rd [A] [Data] NA P "
+
+So here we say that we want to read 1 byte from the register specified by Comm. In our case, this is CCS811_HW_ID (a macro for the value 0x20, specified in the datasheet)
 
 Memory for the IIO device is allocated using devm_iio_device_alloc.
 
