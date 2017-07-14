@@ -30,9 +30,9 @@ static struct i2c_driver ccs811_driver = {
 module_i2c_driver(ccs811_driver);
 ```
 
-The MODULE_DEVICE_TABLE macro is used for hot plugging. It exports the table of supported devices, so when the kernel discovers a new device, the right module will be loaded for it. 
+The **MODULE_DEVICE_TABLE** macro is used for hot plugging. It exports the table of supported devices, so when the kernel discovers a new device, the right module will be loaded for it. 
 
-As mentioned above, our driver knows that it supports "ccs811" device. But when we plug in an I2C device, how does the kernel know what it is named? It doesn't! We must explicitly instantiate the device. Different methods of instantiating devices are documented here: instantiating-devices(https://www.kernel.org/doc/Documentation/i2c/instantiating-devices). 
+As mentioned above, our driver knows that it supports "ccs811" device. But when we plug in an I2C device, how does the kernel know what it is named? It doesn't! We must explicitly instantiate the device. Different methods of instantiating devices are documented here: [instantiating-devices](https://www.kernel.org/doc/Documentation/i2c/instantiating-devices). 
 For example we can instantiate from userspace using the special attribute file new_device. 
 
 ```sh
