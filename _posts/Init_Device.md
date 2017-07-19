@@ -40,7 +40,7 @@ You can check the current mode by reading the FW_MODE flag (7th bit of STATUS re
 	0: Firmware is in boot mode, this allows new firmware to be loaded 
 	1: Firmware is in application mode. CCS811 is ready to take ADC measurements
 
-Going back to `ccs811_start_sensor_application()`: to transition to application mode, we first check the STATUS register's flag APP_VALID (4th bit). This tells us if a valid application is loaded in memory. If the answer is 'yes', we can try to start it by making a setup write to the APP_START register. A setup write means sending just the address of the APP_START register to the device, with no other data to follow. If the operation is successful, we're ready to take ADC measurements (we can read voltage across the sensor and current).
+Going back to `ccs811_start_sensor_application()`: to transition to application mode, we first check the STATUS register's flag APP_VALID (4th bit). This tells us if a valid application is loaded in memory. If the answer is 'yes', we can try to start it by making a setup write to the APP_START register. A setup write means sending just the address of the APP_START register to the device, with no other data to follow. After this, we go and check the STATUS register again, to make sure we successfully transitioned to application mode (FW_MODE flag is 1). If the operation is successful, we're ready to take ADC measurements (we can read voltage across the sensor and current).
 
 ```c
 static int ccs811_start_sensor_application(struct i2c_client *client)
@@ -81,8 +81,6 @@ To be able to measure TVOC and eCO2 we need to place the device in a state in wh
 	- Mode 2 – Pulse heating mode IAQ measurement every 10 seconds
 	- Mode 3 – Low power pulse heating mode IAQ measurement every 60 seconds
 	- Mode 4 – Constant power mode, sensor measurement every 250ms
-
-After selecting the desired drive mode, we go and check the STATUS register again, to make sure we successfully transitioned to application mode (FW_MODE flag is 1).
 
 For visualization, check out this nice diagram, taken from [CCS811_Programming_Guide](https://cdn.sparkfun.com/datasheets/BreakoutBoards/CCS811_Programming_Guide.pdf) which displays the whole setup process. 
 [poza]
