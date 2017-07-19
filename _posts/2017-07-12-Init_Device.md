@@ -20,7 +20,7 @@ static int ccs811_setup(struct i2c_client *client)
 }
 ```
 
-You can see that this function calls ccs811_start_sensor_application() and performs a write to the MEAS_MODE register. Let's take a closer look.
+You can see that this function calls `ccs811_start_sensor_application()` and performs a write to the MEAS_MODE register. Let's take a closer look.
 
 #### Transition from "boot" to "application"
 
