@@ -3,9 +3,7 @@ layout: post
 title: Device initialization
 ---
 
-### Device initialization
-
-Some drivers use a setup/device-initialization function to set up default values, to put the device in a known state, etc.
+Some drivers use a setup/initialization function to set up default values, to put the device in a known state, etc.
 I defined a function like this for ccs811 sensor:
 
 ```c
