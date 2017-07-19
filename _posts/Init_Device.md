@@ -84,6 +84,8 @@ To be able to measure TVOC and eCO2 we need to place the device in a state in wh
 	- Mode 3 – Low power pulse heating mode IAQ measurement every 60 seconds
 	- Mode 4 – Constant power mode, sensor measurement every 250ms
 
+The code:
+
 ```c
 return i2c_smbus_write_byte_data(client, CCS811_MEAS_MODE, CCS811_MODE_IAQ_1SEC);
 ```
