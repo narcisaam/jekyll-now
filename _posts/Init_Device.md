@@ -6,7 +6,7 @@ title: Device initialization
 ### Device initialization
 
 Some drivers use a setup/device-initialization function to set up default values, to put the device in a known state, etc.
-I defined a function like this for ccs811 sensor: ccs811_setup() 
+I defined a function like this for ccs811 sensor:
 
 ```c
 static int ccs811_setup(struct i2c_client *client)
