@@ -24,6 +24,8 @@ static int ccs811_setup(struct i2c_client *client)
 
 You can see that this function calls ccs811_start_sensor_application() and performs a write to the MEAS_MODE register. Let's take a closer look.
 
+#### Transition from "boot" to "application"
+
 `ccs811_start_sensor_application()` - what does this do ?
 
 CCS811 powers-up in boot mode. This allows new firmware to be loaded, in case an update is needed. Firmware is the (usually) small piece of code that orchestrates the functions of a hardware device. It is stored in non-volatile memory. When ccs811 is powered up, code starts executing on the microcontroller on board. The bootloader performs the basic initialization of different hardware elements and after the boot process finishes, the state in which the device is left is called **boot mode**. In order to take measurements with our sensor, we now want to transition from boot mode to **application mode**. Similarly to when you power up your computer, after the boot process is finished, the operating system is given full control of the hardware. Here, we need to explicitly give control to the _application_ loaded to the chip. The _application_ is just another set of instructions stored in memory, responsible with managing hardware functions.
@@ -73,7 +75,7 @@ static int ccs811_start_sensor_application(struct i2c_client *client)
 }
 ```
 
-### Selecting operating mode
+#### Selecting operating mode
 
 To be able to measure TVOC and eCO2 we need to place the device in a state in which measurements are enabled. This is done by writing the desired operating mode to MEAS_MODE register. By default, the device is idle, which means all IAQ measurements are off. We can choose between 4 drive modes, that enable measurements:
 
