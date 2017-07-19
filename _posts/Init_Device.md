@@ -42,6 +42,37 @@ You can check the current mode by reading the FW_MODE flag (7th bit of STATUS re
 
 Going back to `ccs811_start_sensor_application()`: to transition to application mode, we first check the STATUS register's flag APP_VALID (4th bit). This tells us if a valid application is loaded in memory. If the answer is 'yes', we can try to start it by making a setup write to the APP_START register. A setup write means sending just the address of the APP_START register to the device, with no other data to follow. If the operation is successful, we're ready to take ADC measurements (we can read voltage across the sensor and current).
 
+```c
+static int ccs811_start_sensor_application(struct i2c_client *client)
+{
+	int ret;
+
+	ret = i2c_smbus_read_byte_data(client, CCS811_STATUS);
+	if (ret < 0)
+		return ret;
+
+	if ((ret & CCS811_STATUS_APP_VALID_MASK) !=
+	    CCS811_STATUS_APP_VALID_LOADED)
+		return -EIO;
+
+	ret = i2c_smbus_write_byte(client, CCS811_APP_START);
+	if (ret < 0)
+		return ret;
+
+	ret = i2c_smbus_read_byte_data(client, CCS811_STATUS);
+	if (ret < 0)
+		return ret;
+
+	if ((ret & CCS811_STATUS_FW_MODE_MASK) !=
+	    CCS811_STATUS_FW_MODE_APPLICATION) {
+		dev_err(&client->dev, "Application failed to start. Sensor is still in boot mode.\n");
+		return -EIO;
+	}
+
+	return 0;
+}
+```
+
 ### Selecting operating mode
 
 To be able to measure TVOC and eCO2 we need to place the device in a state in which measurements are enabled. This is done by writing the desired operating mode to MEAS_MODE register. By default, the device is idle, which means all IAQ measurements are off. We can choose between 4 drive modes, that enable measurements:
