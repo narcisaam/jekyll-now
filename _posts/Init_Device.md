@@ -82,7 +82,12 @@ To be able to measure TVOC and eCO2 we need to place the device in a state in wh
 	- Mode 3 – Low power pulse heating mode IAQ measurement every 60 seconds
 	- Mode 4 – Constant power mode, sensor measurement every 250ms
 
-For visualization, check out this nice diagram, taken from [CCS811_Programming_Guide](https://cdn.sparkfun.com/datasheets/BreakoutBoards/CCS811_Programming_Guide.pdf) which displays the whole setup process. 
+```c
+return i2c_smbus_write_byte_data(client, CCS811_MEAS_MODE, CCS811_MODE_IAQ_1SEC);
+```
+Here, I set the measurement mode to Mode 1
+
+For visualization on the entire setup process, check out this nice diagram, taken from [CCS811_Programming_Guide](https://cdn.sparkfun.com/datasheets/BreakoutBoards/CCS811_Programming_Guide.pdf).
 
 ![Initialization Flow]({{ site.baseurl }}/images/initflowdiagram.png "Initialization Flow")
 
