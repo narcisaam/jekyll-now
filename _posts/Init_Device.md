@@ -83,7 +83,9 @@ To be able to measure TVOC and eCO2 we need to place the device in a state in wh
 	- Mode 4 – Constant power mode, sensor measurement every 250ms
 
 For visualization, check out this nice diagram, taken from [CCS811_Programming_Guide](https://cdn.sparkfun.com/datasheets/BreakoutBoards/CCS811_Programming_Guide.pdf) which displays the whole setup process. 
-[poza]
+
+![Initialization Flow]({{ site.baseurl }}/images/initflowdiagram.png "Initialization Flow")
+
 
 
 
