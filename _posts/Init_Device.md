@@ -33,8 +33,8 @@ To sum up:
 
 Maybe I overemphasized on these device-specific details, but when I first tried to take measurements with my sensor, I wrongly assumed that the application mode starts automatically. I first read the hardware id and version and everything was fine. Then I  intended to choose an operating mode for the device by writing the MEAS_MODE register and surprise! The error register was set with “invalid register address ID”. I double checked the address of MEAS_MODE register from the datasheet - it _was_ valid. Only... it was valid while in application mode! And I was still in boot mode. Basically, if you read the datasheet you can see there are 2 register maps: 
 
-	- application register map
- 	- bootloader register map
+	* application register map
+ 	* bootloader register map
   
 You can check the current mode by reading the FW_MODE flag (7th bit of STATUS register). Note that STATUS register is available in both ways of operating. From the datasheet, if the FW_MODE flag's value is:
 
