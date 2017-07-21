@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Device initialization
+comments: true
 ---
 
 Some drivers use a setup/initialization function to set up default values, to put the device in a known state, etc.
