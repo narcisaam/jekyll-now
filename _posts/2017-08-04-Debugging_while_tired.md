@@ -1,9 +1,12 @@
-
+---
+layout: post
+title: Hardware Setup
+---
 
 ### Don't debug when you're tired!
 
 
-Have you ever had a bug in your code that turned you from a rational, reasonable human being to an angry, paranoid person? I'm talking about those times when you're a 100% sure that your code is correct, so you start thinking there must be something very weird going on that causes it to crash. It gotta be something else! Maybe the virtual machine is broken, maybe it's a compiler bug! When you're working with hardware it's even easier to find reasons. _This wire doesn't look really good, maybe I should replace it_. Well, to keep programmers from wondering and wandering aimlessly, debugging tools have been invented. But debugging tools come with a warning. “Not to be used when you're tired!” Haha! 
+Have you ever had a bug in your code that turned you from a rational, reasonable human being to an angry, paranoid person? I'm talking about those times when you're a 100% sure that your code is correct, so you start thinking there must be something very weird going on that causes it to crash. It gotta be something else! _Maybe the virtual machine is broken, maybe it's a compiler bug!_ When you're working with hardware it's even easier to find reasons. _This wire doesn't look really good, maybe I should replace it_. Well, to keep programmers from wondering and wandering aimlessly, debugging tools have been invented. But debugging tools come with a warning. “Not to be used when you're tired!” Haha! 
 
 Yesterday, I was working on a new feature for my driver and I managed to somehow cause a kernel oops. I double checked the code - it seemed fine (of course it did!). I started investigating the problem, I analyzed the stack trace – not very helpful on its own. I disassembled the code to find where it crashed, and after victoriously finding the offset I thought: no, it doesn't make any sense, there's nothing wrong with the code here. It seems I got somehow overpowered by a very well known human response: denial! So, I wasted some time testing again some other parts of the code, rereading some documentation and searching the internet for similar bugs. At this point, it got pretty late, so I decided I'll take a break and start again in the morning.
 
