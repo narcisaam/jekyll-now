@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Don’t debug when you’re tired!
+title: While debugging...
 ---
 
 Have you ever had a bug in your code that turned you from a rational, reasonable human being to an angry, paranoid person? I'm talking about those times when you're a 100% sure that your code is correct, so you start thinking there must be something very weird going on that causes it to crash. It gotta be something else! _Maybe the virtual machine is broken, maybe it's a compiler bug!_ When you're working with hardware it's even easier to find reasons. _This wire doesn't look really good, maybe I should replace it_. Well, to keep programmers from wondering and wandering aimlessly, debugging tools have been invented. But debugging tools come with a warning. “Not to be used when you're tired!” Haha! 
