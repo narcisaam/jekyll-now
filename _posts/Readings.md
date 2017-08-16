@@ -3,6 +3,7 @@ layout: post
 title: Reading from the device
 ---
 
+
 After the device is initialized and one of the „active measurements” mode is set, the sensor provides samples of data that can be read from the register called (in the datasheet) „Algorithm Results Data”.  This is an 8-byte read only register that contains the calculated eCO2 (ppm) and TVOC (ppb) values followed by the STATUS register, ERROR_ID register and the RAW_DATA register(which holds current + voltage). As you can see, the device provides multiple types of information: eCO2, TVOC, current through the sensor, voltage across the sensor. For each of these types of data we are going to define an IIO channel. 
 
 An IIO channel is represented using `struct iio_chan_spec`.  I need 3 types of channels for my driver: IIO_CURRENT, IIO_VOLTAGE, IIO_CONCENTRATION. eCO2 and TVOC represent 2 separate data channels (2 different types of information) that translate into the same type of IIO channel: IIO_CONCENTRATION. To distinguish between them, we use modifiers to indicate the unique purpose of each channel. 
